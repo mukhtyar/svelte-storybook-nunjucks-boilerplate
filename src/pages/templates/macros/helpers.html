@@ -1,0 +1,26 @@
+{% macro svgIcon(id, classes) %}
+  <div class="icon {{classes}}">
+    <img src="../media/icons/{{ id }}.svg">
+  </div>
+{% endmacro %}
+
+{% macro toolNavbar(name, slug, items) %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-tool">
+    <a class="navbar-brand" href="/">
+     <img class="logo" src="../media/logos/cal-adapt_logo.svg" alt="Cal-Adapt logo" data-skip-inject-svg style="width:100px;height:2rem;">
+    </a>
+    <div class="navbar-tool-container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tools">Tools</a></li>
+        <li class="breadcrumb-item active"><a href="/tools/{{ slug }}">{{ name }}</a></li>
+      </ol>
+      <ul class="navbar-nav ml-auto">
+      {% for item in items %}
+        <li class="nav-item">
+          <a data-scroll href="#{{ item | replace(" ", "-") }}" class="nav-link">{{ item }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </nav>
+{% endmacro %}

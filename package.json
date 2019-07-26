@@ -1,0 +1,57 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open --hot --config webpack.dev.js",
+    "storybook": "start-storybook -p 8080 -c .storybook",
+    "build-storybook": "build-storybook -c .storybook",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Julien Phuez",
+    "url": "https://github.com/julienphuez"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bulma": "^0.7.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.5",
+    "@storybook/addon-a11y": "^5.1.9",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-knobs": "^5.1.9",
+    "@storybook/addon-notes": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/svelte": "^5.1.9",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "nunjucks": "^3.2.0",
+    "nunjucks-html-loader": "^1.1.0",
+    "nunjucks-to-html-loader": "^1.0.0",
+    "sass-loader": "^7.1.0",
+    "sass-resources-loader": "^2.0.1",
+    "style-loader": "^0.23.1",
+    "svelte": "^3.6.8",
+    "svelte-loader": "^2.13.5",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-glob-folder-entries": "^1.0.0",
+    "webpack-merge": "^4.2.1"
+  }
+}

@@ -5,7 +5,7 @@ import ButtonComponent from "./components/Button.svelte";
 const app = new ButtonComponent({
   target: document.querySelector("#root"),
   props: {
-    text: 'index page'
+    text: 'Svelte Button'
   }
 });
 

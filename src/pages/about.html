@@ -1,0 +1,33 @@
+{% extends 'site.html' %}
+
+{% block page_content %}
+<main>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">About</h1>
+      </div>
+    </div>
+  </section>
+  <section class="section is-medium has-text-centered">
+    <div class="container">
+      <ul class="columns">
+        {% for member in staff.current -%}
+        <li class="column">
+          <div class="media">
+            <div class="media-content">
+              <p>
+                <strong>{{ member.name }}</strong>
+                <br/>
+                {{ member.org }}
+              </p>
+            </div>
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+</main>
+{% endblock %}

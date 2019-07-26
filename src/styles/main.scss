@@ -2,6 +2,15 @@
 
 $family-primary: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+.background-image {
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 30rem;
+  background-image: url('/media/banners/yosemite_2000w.jpg');
+}
+
 @import 'bulma/sass/utilities/_all.sass';
 @import 'bulma/sass/base/_all.sass';
 @import 'bulma/sass/elements/_all.sass';

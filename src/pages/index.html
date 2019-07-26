@@ -2,163 +2,51 @@
 
 {% block page_content %}
 <main>
-  <!-- Banner -->
-  <section class="hero is-primary">
+
+  <section class="hero is-medium is-bold has-text-white background-image">
     <div class="hero-body">
-      <h1 class="">Exploring California&#39;s Climate Change Research</h1>
-      <p>
-        Cal-Adapt provides a view of how climate change might affect California. Find tools, data, and resources to conduct research, develop adaptation plans and build applications.
-      </p>
-    </div>
-  </section>
-  <section class="jumbotron">
-    <div class="container-fluid">
-      <div class="row banner">
-        <div class="col text-center">
-          <div>
-            <h1 class="display-4 text-white">Exploring California&#39;s Climate Change Research</h1>
-            <p class="lead">Cal-Adapt provides a view of how climate change might affect California. Find tools, data, and resources to conduct research, develop adaptation plans and build applications.</p>
+      <div class="container">
+        <h1 class="title has-text-white ">Cal-Adapt</h1>
+        <h2 class="subtitle has-text-white">Exploring California&#39;s Climate Change Research</h2>
+        <div class="columns">
+          <div class="column">
+            <p class="max-width:50%;">
+              Cal-Adapt provides a view of how climate change might affect California. Find tools, data, and resources to conduct research, develop adaptation plans and build applications.
+            </p>
           </div>
-          <ul class="list-inline w-100 d-flex flex-wrap justify-content-center">
-            <li class="item">
-              {{ svgIcon('sun', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('moon', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('rainfall', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('snowflake', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('sea', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('wildfire', 'icon-md mx-1') }}
-            </li>
-            <li class="item">
-              {{ svgIcon('streamflow', 'icon-md mx-1') }}
-            </li>
-          </ul>
+          <div class="column">
+            <ul class="columns">
+              <li class="column">
+                {{ svgIcon('sun', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('moon', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('rainfall', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('snowflake', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('sea', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('wildfire', 'is-large') }}
+              </li>
+              <li class="column">
+                {{ svgIcon('streamflow', 'is-large') }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div id="root">
-
+  </section>
+  <section class="section is-medium has-text-centered">
+    <div class="container">
+      <div id="root"></div>
     </div>
   </section>
-
-  <section class="container-fluid p-4 tools-list">
-    <div class="row">
-      <div class="col">
-        <ul class="list-inline d-flex flex-row flex-wrap align-items-stretch text-gray-300">
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/annual-averages">Annual Averages</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/extreme-precipitation">Extreme Precipitation Events</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/extreme-heat">Extreme Heat Days & Warm Nights</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/degree-days">Cooling Degree Days & Heating Degree Days</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/snowpack">Snowpack</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/slr-calflod-3d">Sea Level Rise - CalFloD-3D</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/wildfire">Wildfire</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/streamflow">Streamflow</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/extended-drought">Extended Drought Scenarios</a>
-          </li>
-          <li class="list-item">
-            <a class="text-gray-100" href="/tools/slr-hourly-projections">Hourly Projections of Sea Level</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="survey w-60">
-      <span>We want your feedback to improve Cal-Adapt, serve a wider audience, and ensure that the latest climate science is accessible to a range of users. Please fill out <a href="https://forms.gle/L3MmSvX1zwudJXA79" target="_blank">this quick survey</a>. Thank you!</span>
-    </div>
-  </section>
-
-  <section class="container-fluid p-4 tools-annoucement">
-    <div class="row">
-      <div class="col-sm-12 col-md-6">
-        <a class="d-block annoucement" href="/data">
-          <div class="corner-ribbon bg-deep-orange">New Tool</div>
-          <div class="p-3 pt-5">
-            <h5 class="mb-1">Data Download</h5>
-            <p>Search, select, subset, aggregate, and download climate data for a suite of projections and variables.</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <a class="d-block annoucement" href="/data/download">
-          <div class="corner-ribbon bg-cyan">New Data</div>
-          <div class="p-3 pt-5">
-            <h5 class="mb-1">Wind Speed, Solar Radiation and Relative Humidity</h5>
-            <p>LOCA downscaled data for daily wind speed, incoming solar radiation, minimum and maximum specific humidity from Scripps Institution of Oceanography.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main -->
-  <section class="container-fluid m-4">
-    <div class="row">
-      <article class="col-md pt-3 d-flex flex-column align-content-stretch">
-        <h2>Climate Tools</h2>
-        <p style="flex-grow:1;margin-bottom:1rem;">Explore projected changes in temperature, precipitation, snowpack and sea level rise in California over this century with our interactive climate data visualizations.</p>
-        <a href="/tools" class="btn btn-primary btn-md d-block align-self-start">Explore</a>
-      </article>
-      <article class="col-md pt-3 d-flex flex-column align-content-stretch">
-        <h2>Download Data</h2>
-        <p style="flex-grow:1;margin-bottom:1rem;">Search climate datasets on Cal-Adapt and download data for various climate variables, scenarios and models using different spatial and temporal aggregation options in tabular and raster formats.</p>
-        <a href="/data" class="btn btn-primary btn-md d-block align-self-start">Explore</a>
-      </article>
-      <article class="col-md pt-3 d-flex flex-column align-content-stretch">
-        <h2>Find Resources</h2>
-        <p style="flex-grow:1;margin-bottom:1rem;">Search State of California's Research Catalog, explore peer-reviewed publications, understand how to use climate projections.</p>
-        <a href="/resources" class="btn btn-primary btn-md d-block align-self-start">Explore</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="container-fluid mt-5 p-5 bg-gray-100">
-    <p class="h3 text-center">Use the <span class="font-weight-bold ">Cal-Adapt Web API</span> to build your own applications.</p>
-    <p class="mb-4 text-center">Integrate climate projections for California with your own tools and workflows. Based on accepted standards for REST, JSON and HTTP. For more information about the using the Cal-Adapt API, check out the <a href="https://berkeley-gif.github.io/caladapt-docs/index.html" target="_blank">API documentation</a> or <a href="mailto:support@cal-adapt.org">contact</a> us for more information.</p>
-    <hr />
-    <div class="mt-3 text-center">
-      <p class="lead">
-       Get updates on new Climate Tools, Data and Resources on Cal-Adapt.
-      </p>
-      <a class="btn btn-primary btn-lg" href="/signup.html" target="_blank">Subsribe to the Cal-Adapt Newsletter</a>
-    </div>
-  </section>
-
-  <!-- Collaborators -->
-  <section class="container-fluid mt-5">
-    <p class="h3 text-center">Cal-Adapt Contributors</p>
-    <p class="text-center">Cal-Adapt synthesizes volumes of downscaled climate change projections and climate impact research from California&#39;s scientific community.</p>
-    <div class="w-75 mt-4 mx-auto text-center">
-      <img class="img-fluid" src="../media/logos/Collaborators.gif" alt="" />
-    </div>
-  </section>
-
 </main>
 {% endblock %}

@@ -3,15 +3,15 @@ const webpack = require('webpack');
 const glob_entries = require('webpack-glob-folder-entries');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const buildPath = path.resolve(__dirname, 'public');
 
+const pages = require('./src/pages/scripts/pages.js');
+const buildPath = path.resolve(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
 
-// Optional, but highly recommended. Create a returnEntries:
 // Webpack doesn't support glob paths. For the nunjucks-html-loader
-// we need each path to be specified for it to work (YES, even subdirectories!)
-
+// we need each path to be specified for it to work (even subdirectories)
 function returnEntries(globPath){
   let entries = glob_entries(globPath, true);
   let folderList = new Array();
@@ -24,6 +24,7 @@ function returnEntries(globPath){
 module.exports = {
   entry: {
     main: './src/js/main.js',
+    'annual-averages': './src/js/tools/annual-averages.js',
   },
   output: {
     filename: isProd ? 'js/[name].[contenthash].js' : 'js/[name].js',
@@ -56,7 +57,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: isProd ? '[path][name].[contenthash].[ext]' : '[path][name].[ext]',
+          context: 'src'
         }
       },
       {
@@ -68,9 +70,10 @@ module.exports = {
             loader  : "nunjucks-html-loader",
             options : {
               // Other super important. This will be the base
-              // directory in which webpack is going to find 
+              // directory in which webpack is going to find
               // the layout and any other file index.njk is calling.
-              searchPaths: [...returnEntries('./src/pages/templates/**/')]
+              searchPaths: [...returnEntries('./src/pages/templates/**/')],
+              context: require('./src/pages/scripts/index.js')
               // Use the one below if you want to use a single path.
               // searchPaths: ['./client/templates'],
             }
@@ -81,15 +84,20 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([{
+      from: 'static',
+      context: 'src'
+    }]),
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
     }),
-    new HtmlWebpackPlugin({
+    ...pages.generatePages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
+/*    new HtmlWebpackPlugin({
       template: 'nunjucks-html-loader!./src/pages/index.html',
       inject: 'body',
       chunks: ['main'],
       filename: 'index.html'
-    })
+    })*/
   ]
 /*  resolve: {
     extensions: ['.mjs', '.js', '.svelte'],

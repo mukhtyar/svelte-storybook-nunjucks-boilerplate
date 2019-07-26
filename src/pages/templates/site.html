@@ -11,10 +11,6 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f8f265">
     <meta name="theme-color" content="#ffffff">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i">
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="/styles/main.css">
     {% block page_css %}
     {% endblock %}
   </head>
@@ -29,18 +25,5 @@
     {% include "partials/footer.html" %}
 
      <!-- SCRIPTS -->
-    <!-- Scripts common to all pages -->
-    {% block javascript %}
-      <script src="/js/runtime.js"></script>
-      <script src="/js/vendor.js"></script>
-      <script src="/js/main.js"></script>
-    {% endblock %}
-
-     <!-- Scripts specific to page -->
-    {% block page_scripts %}
-    {% endblock %}
-
-     <!-- Google Analytics -->
-     {% include "partials/google-analytics.html" %}
   </body>
 </html>

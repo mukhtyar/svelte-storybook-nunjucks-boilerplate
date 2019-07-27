@@ -3,7 +3,7 @@
 {% block page_content %}
 <main>
 
-  <section class="hero">
+  <section class="hero is-primary">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">About</h1>
@@ -12,9 +12,9 @@
   </section>
   <section class="section is-medium has-text-centered">
     <div class="container">
-      <ul class="columns">
+      <ul class="content">
         {% for member in staff.current -%}
-        <li class="column">
+        <li class="box">
           <div class="media">
             <div class="media-content">
               <p>

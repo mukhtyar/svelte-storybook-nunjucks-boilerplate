@@ -1,5 +1,5 @@
 <button class="button is-primary is-large" on:click={onClick}>
-    {text}
+  {text}
 </button>
 
 <style>
@@ -10,7 +10,6 @@
 
 <script>
   import { createEventDispatcher } from 'svelte';
-  console.log('reached here');
 
   export let text = 'Default';
 

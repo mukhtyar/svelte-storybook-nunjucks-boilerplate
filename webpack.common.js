@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const pages = require('./src/pages/scripts/pages.js');
+const pages = require('./pages.generate.js');
 const buildPath = path.resolve(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -73,7 +73,7 @@ module.exports = {
               // directory in which webpack is going to find
               // the layout and any other file index.njk is calling.
               searchPaths: [...returnEntries('./src/pages/templates/**/')],
-              context: require('./src/pages/scripts/index.js')
+              context: require('./pages.data.js')
               // Use the one below if you want to use a single path.
               // searchPaths: ['./client/templates'],
             }

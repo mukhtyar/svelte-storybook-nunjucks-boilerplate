@@ -1,2 +1,10 @@
+import ButtonComponent from "./../components/Button.svelte";
 
-console.log('Load annual averages tool');
+document.addEventListener('DOMContentLoaded', () => {
+	new ButtonComponent({
+	  target: document.querySelector("#mapContainer"),
+	  props: {
+	    text: 'Annual Averages Button'
+	  }
+	});
+});

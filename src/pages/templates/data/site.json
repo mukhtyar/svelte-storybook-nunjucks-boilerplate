@@ -6,10 +6,6 @@
 	      "org": "Executive Director (Project Lead)"
 	    },
 	    {
-	      "name": "Maggi Kelly",
-	      "org": "Faculty Director (Advisory Oversight)"
-	    },
-	    {
 	      "name": "Brian Galey",
 	      "org": "Senior Web Application Developer"
 	    },
@@ -20,23 +16,6 @@
 	    {
 	      "name": "Eric Lehmer",
 	      "org": "Web Application Developer"
-	    }
-	  ],
-	  "prior": [
-	    {
-	      "name": "Kevin Koy"
-	    },
-	    {
-	      "name": "Falk Schuetzenmeister"
-	    },
-	    {
-	      "name": "Sarah Van Vart"
-	    },
-	    {
-	      "name": "Ankita Goyal"
-	    },
-	    {
-	      "name": "Mark O'Connor"
 	    }
 	  ]
 	}

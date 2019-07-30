@@ -1,10 +1,12 @@
-import ButtonComponent from "./../components/Button.svelte";
+import MapComponent from "./../components/Map.svelte";
 
 document.addEventListener('DOMContentLoaded', () => {
-	new ButtonComponent({
+	new MapComponent({
 	  target: document.querySelector("#mapContainer"),
 	  props: {
-	    text: 'Annual Averages Button'
+	    lat: 40.5,
+      lon: -120.5,
+      zoom: 5,
 	  }
 	});
 });

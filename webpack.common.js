@@ -21,11 +21,13 @@ function returnEntries(globPath){
   return folderList;
 }
 
+const entryPoints = {
+  main: './src/js/main.js',
+  'annual-averages': './src/js/tools/annual-averages.js',
+};
+
 module.exports = {
-  entry: {
-    main: './src/js/main.js',
-    'annual-averages': './src/js/tools/annual-averages.js',
-  },
+  entry: entryPoints,
   output: {
     filename: isProd ? 'js/[name].[contenthash].js' : 'js/[name].js',
     path: buildPath
@@ -62,9 +64,10 @@ module.exports = {
         }
       },
       {
-        test: /\.html$/,
+        test: /src/pages/.+\.html$/,
         exclude : /node_modules/,
         use : [
+          //'html-loader?attrs[]=img:src&attrs[]=video:src&attrs[]=source:src',
           'html-loader',
           {
             loader  : "nunjucks-html-loader",
@@ -72,14 +75,14 @@ module.exports = {
               // Other super important. This will be the base
               // directory in which webpack is going to find
               // the layout and any other file index.njk is calling.
-              searchPaths: [...returnEntries('./src/pages/templates/**/')],
+              searchPaths: [...returnEntries('./src/templates/**/')],
               context: require('./pages.data.js')
               // Use the one below if you want to use a single path.
               // searchPaths: ['./client/templates'],
             }
           }
         ]
-      }
+      },
     ]
   },
   plugins: [
@@ -91,13 +94,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
     }),
-    ...pages.generatePages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
-/*    new HtmlWebpackPlugin({
-      template: 'nunjucks-html-loader!./src/pages/index.html',
-      inject: 'body',
-      chunks: ['main'],
-      filename: 'index.html'
-    })*/
+    ...pages.generateTopLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
+    ...pages.generateSecondLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages')), entryPoints),
+    ...pages.generateBlogPosts(path.resolve(__dirname, path.join(__dirname, './src/blog'))),
   ]
 /*  resolve: {
     extensions: ['.mjs', '.js', '.svelte'],

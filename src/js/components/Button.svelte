@@ -1,7 +1,3 @@
-<button class="button is-primary is-large" on:click={onClick}>
-  {text}
-</button>
-
 <style>
   .button {
     color: black;
@@ -20,3 +16,7 @@
     dispatch('click', event)
   }
 </script>
+
+<button class="button is-primary is-large" on:click={onClick}>
+  {text}
+</button>

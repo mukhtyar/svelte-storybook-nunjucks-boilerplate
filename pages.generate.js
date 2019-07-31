@@ -1,7 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
 const marked = require('meta-marked');
+var nunjucks = require('nunjucks');
+
+const pagesPath = path.resolve(__dirname, path.join(__dirname, './src/pages'));
+const templatePath = path.resolve(__dirname, path.join(__dirname, './src/templates/**/*'));
+
 
 // Returns list of subdirectories in a directory
 function returnSubFolders(dir){
@@ -44,8 +50,32 @@ function mdFiles(dir) {
     });
 }
 
+
+
 const pages = {
-  generateTopLevelPages: function generatePages(pagesPath) {
+  generateTopLevelPages: function () {
+    const env = nunjucks.configure('src/templates', {
+      autoescape: false,
+    });
+    const topLevelFiles = returnFileList(pagesPath);
+    const chunks = ['main'];
+    const templates = topLevelFiles.map((file) => {
+      let name = path.basename(file, '.html');
+      if (name !== 'index') {
+        name = `${name}/index`;
+      }
+      return {
+        from: `${file}`,
+        to: `${name}.html`,
+        //template: './src/templates/site.html'
+      }
+    });
+    return new NunjucksWebpackPlugin({
+      templates,
+      environment: env,
+    });
+  },
+/*  generateTopLevelPages: function generatePages(pagesPath) {
     const topLevelFiles = returnFileList(pagesPath);
     const chunks = ['main'];
     return topLevelFiles.map((file) => {
@@ -63,7 +93,7 @@ const pages = {
         },
       });
     });
-  },
+  },*/
   generateSecondLevelPages: function generatePages(pagesPath, entryPoints) {
     const folderPaths = returnSubFolders(pagesPath);
     const plugins = [];

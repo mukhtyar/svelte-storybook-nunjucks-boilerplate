@@ -1,12 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const fm = require('front-matter');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
-const marked = require('meta-marked');
-var nunjucks = require('nunjucks');
-
-const pagesPath = path.resolve(__dirname, path.join(__dirname, './src/pages'));
-const templatePath = path.resolve(__dirname, path.join(__dirname, './src/templates/**/*'));
 
 
 // Returns list of subdirectories in a directory
@@ -45,37 +40,17 @@ function mdFiles(dir) {
     .map(filename => {
       return {
         name: path.parse(filename).name,
-        content: fs.readFileSync(path.join(dir, filename), 'utf8')
+        content: fs.readFileSync(path.join(dir, filename), 'utf8', function(err, data) {
+          if (err) throw err;
+          return fm(data);
+        }),
       };
     });
 }
 
 
-
 const pages = {
-  generateTopLevelPages: function () {
-    const env = nunjucks.configure('src/templates', {
-      autoescape: false,
-    });
-    const topLevelFiles = returnFileList(pagesPath);
-    const chunks = ['main'];
-    const templates = topLevelFiles.map((file) => {
-      let name = path.basename(file, '.html');
-      if (name !== 'index') {
-        name = `${name}/index`;
-      }
-      return {
-        from: `${file}`,
-        to: `${name}.html`,
-        //template: './src/templates/site.html'
-      }
-    });
-    return new NunjucksWebpackPlugin({
-      templates,
-      environment: env,
-    });
-  },
-/*  generateTopLevelPages: function generatePages(pagesPath) {
+  generateTopLevelPages: function generate(pagesPath) {
     const topLevelFiles = returnFileList(pagesPath);
     const chunks = ['main'];
     return topLevelFiles.map((file) => {
@@ -84,17 +59,14 @@ const pages = {
         name = `${name}/index`;
       }
       return new HtmlWebpackPlugin({
-        template: `nunjucks-html-loader!${file}`,
+        template: file,
         chunks,
         filename: `${name}.html`,
-        templateParameters: {
-          title: 'foo',
-          content: 'bar'
-        },
+        context: { md: '', title: 'My Inserted Title' },
       });
     });
-  },*/
-  generateSecondLevelPages: function generatePages(pagesPath, entryPoints) {
+  },
+  generateSecondLevelPages: function generate(pagesPath, entryPoints) {
     const folderPaths = returnSubFolders(pagesPath);
     const plugins = [];
     folderPaths.forEach((folderPath) => {
@@ -107,7 +79,7 @@ const pages = {
           chunks.push(name);
         }
         plugins.push(new HtmlWebpackPlugin({
-          template: `nunjucks-html-loader!${file}`,
+          template: file,
           chunks,
           filename: `${folderName}/${name}/index.html`,
         }));
@@ -115,8 +87,27 @@ const pages = {
     });
     return plugins;
   },
-  generateBlogPosts: function generatePosts(blogPath) {
-    const posts = mdFiles(`${blogPath}/posts`);
+  generateBlogPosts2: function generate(postsPath) {
+    const posts = mdFiles(postsPath);
+    const plugins = [];
+    posts.forEach((mdFile) => {
+      // Convert markdown content to HTML
+      const content = marked(mdFile.content);
+      //const content = marked(mdFile.content);
+      console.log(`Building makdown file: ${mdFile.name}.md...`);
+      console.log(content.meta)
+      plugins.push(new HtmlWebpackPlugin({
+        template: `nunjucks-html-loader!src/templates/partials/blog-post.html`,
+        chunks: ['main'],
+        inject: true,
+        filename: `blog/posts/${mdFile.name}.html`,
+        title: content.meta.title,
+      }));
+    });
+    return plugins;
+  },
+  generateBlogPosts: function generate(postsPath) {
+    const posts = mdFiles(postsPath);
     const plugins = [];
     posts.forEach((mdFile) => {
       // Convert markdown content to HTML

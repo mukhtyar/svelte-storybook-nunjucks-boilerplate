@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const fm = require('front-matter');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const marked = require('meta-marked');
 
 // Returns list of subdirectories in a directory
 function returnSubFolders(dir){
@@ -37,10 +37,12 @@ function mdFiles(dir) {
     // Normalize file data,
     // and write it to the array
     .map(filename => {
-      return {
-        name: path.parse(filename).name,
-        content: fs.readFileSync(path.join(dir, filename), 'utf8')
-      };
+      let content;
+      fs.readFileSync(path.join(dir, filename), 'utf8', function(err, data) {
+        if (err) throw err;
+        content = fm(data);
+        console.log(content)
+      });
     });
 }
 
@@ -55,4 +57,17 @@ function generateBlogPosts(postsPath) {
   })
 };
 
-generateBlogPosts('src/blog/posts');
+//var content = mdFiles('src/blog/posts');
+//console.log(content);
+
+function log() {
+  console.log('reached here');
+  fs.readFile('./src/blog/posts/aws-12052018.md', 'utf8', function(err, data) {
+    if (err) throw err;
+    content = fm(data);
+    console.log(content)
+  });
+}
+
+log();
+

@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pages = require('./pages.generate.js');
+const nunjucksFilters = require('./src/templates/filters');
 const buildPath = path.resolve(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -63,6 +64,36 @@ module.exports = {
           context: 'src'
         }
       },
+      {
+        test: /\.html$/,
+        exclude : /node_modules/,
+        use : [
+          'html-loader',
+          {
+            loader  : 'nunjucks-html-loader',
+            options: {
+              searchPaths: [...returnEntries('./src/templates/**/')],
+              context: require('./pages.data.js'),
+              filters: nunjucksFilters,
+            },
+          },
+        ]
+      },
+      {
+        test: /\.md$/,
+        exclude : /node_modules/,
+        use : [
+          'html-loader',
+          {
+            loader  : 'nunjucks-html-loader',
+            options: {
+              searchPaths: [...returnEntries('./src/templates/**/')],
+              context: require('./pages.data.js'),
+              filters: nunjucksFilters,
+            },
+          },
+        ]
+      },
     ]
   },
   plugins: [
@@ -74,9 +105,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
     }),
-    pages.generateTopLevelPages(),
+    //...pages.generateTopLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
     //...pages.generateSecondLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages')), entryPoints),
-    //...pages.generateBlogPosts(path.resolve(__dirname, path.join(__dirname, './src/blog'))),
+    ...pages.generateBlogPosts(path.resolve(__dirname, path.join(__dirname, './src/blog/posts'))),
   ]
 /*  resolve: {
     extensions: ['.mjs', '.js', '.svelte'],

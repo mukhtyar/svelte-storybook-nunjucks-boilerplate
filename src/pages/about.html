@@ -10,10 +10,12 @@
       </div>
     </div>
   </section>
-  <section class="section is-medium has-text-centered">
+
+  <section class="section">
     <div class="container">
+      <p>This data is injected into the nunjucks template context.</p>
       <ul class="content">
-        {% for member in staff.current -%}
+        {% for member in site.staff.current %}
         <li class="box">
           <div class="media">
             <div class="media-content">
@@ -25,7 +27,7 @@
             </div>
           </div>
         </li>
-        {%- endfor %}
+        {% endfor %}
       </ul>
     </div>
   </section>

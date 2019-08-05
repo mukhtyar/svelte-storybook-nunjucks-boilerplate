@@ -42,7 +42,6 @@ const pages = {
         template: file,
         chunks,
         filename: `${name}.html`,
-        context: { md: '', title: 'My Inserted Title' },
       });
     });
   },
@@ -67,16 +66,25 @@ const pages = {
     });
     return plugins;
   },
+  generateBlogIndexPage: function generate(blogPath) {
+    return new HtmlWebpackPlugin({
+      template: path.resolve(blogPath, 'blog-index.html'),
+      chunks: ['main'],
+      filename: `blog/index.html`,
+    });
+  },
   generateBlogPostPages: function generate(blogPath, posts) {
-    const topLevelFiles = returnFileList(blogPath);
+    const templateFile = path.resolve(blogPath, 'blog-post.html');
+    console.log('blog', templateFile);
+    const markdownFiles = returnFileList(path.resolve(blogPath, 'posts'));
     const chunks = ['main'];
-    return topLevelFiles.map((file) => {
+    return markdownFiles.map((file) => {
       const name = path.basename(file);
       const post = posts.find(d => d.filename === name);
       return new HtmlWebpackPlugin({
-        template: './src/templates/partials/blog-post.html',
+        template: templateFile,
         chunks,
-        filename: `${post.attributes.permalink}/index.html`,
+        filename: `blog/posts/${post.attributes.permalink}/index.html`,
       });
     });
   },

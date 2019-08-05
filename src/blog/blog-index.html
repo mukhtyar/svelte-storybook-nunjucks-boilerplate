@@ -1,0 +1,50 @@
+{% extends 'site.html' %}
+
+{% block page_content %}
+<main>
+
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">Blog</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <p>This data is injected into the nunjucks template context.</p>
+      </div>
+      <div class="columns">
+       {% for post in posts %}
+       <div class="column is-one-third">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="/media/blog/sf_king_tide_200.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4">{{ post.attributes.title }}</p>
+                <p class="subtitle is-6">{{ post.attributes.date }}</p>
+                <a href="{{ post.attributes.permalink }}">Link to post</a>
+              </div>
+            </div>
+            <div class="content">
+              {{ post.attributes.snippet }}
+              <br>
+              <time datetime="{{ post.attributes.date }}"></time>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}       
+      </div>
+    </div>
+  </section>
+  
+</main>
+{% endblock %}

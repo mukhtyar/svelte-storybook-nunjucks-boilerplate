@@ -8,7 +8,7 @@
 
 <script>
   import { onMount, setContext } from 'svelte';
-  import { mapbox, key } from './../helpers/mapbox.js';
+  import { L, key } from './../helpers/leaflet.js';
 
   setContext(key, {
     getMap: () => map
@@ -22,24 +22,15 @@
   let map;
 
   onMount(() => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://unpkg.com/mapbox-gl/dist/mapbox-gl.css';
+    map = L.map(container, {
+      center: [lat, lon],
+      zoom,
+    });
 
-    link.onload = () => {
-      map = new mapbox.Map({
-        container,
-        style: 'mapbox://styles/mapbox/streets-v9',
-        center: [lon, lat],
-        zoom
-      });
-    };
-
-    document.head.appendChild(link);
+    L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png').addTo(map);
 
     return () => {
       map.remove();
-      link.parentNode.removeChild(link);
     };
   });
 </script>

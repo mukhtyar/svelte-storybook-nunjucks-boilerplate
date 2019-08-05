@@ -1,10 +1,11 @@
 ---
 title: Underlying Data and Model Selection in Cal-Adapt 2.0
-link: Underlying Data and Model Selection in Cal-Adapt 2.0
+permalink: underlying-data-model-selection-caladapt-08272017
 date: 2017-08-27
 author: Cal-Adapt
 image: caladapt_post
 tags: Cal-Adapt, data
+snippet: Data and model selection in Cal-Adapt 2.0
 ---
 
 Through Cal-Adapt, users can download projected climate data associated with 32 General Circulation Models (GCMs, also known as Global Climate Models). This suite of models—known as [CMIP5](http://cmip-pcmdi.llnl.gov/cmip5/data_portal.html)—was used as the basis for the United Nation’s Intergovernmental Panel on Climate Change (IPCC) Fifth Assessment Report.  There is a vast body of literature built on the CMIP5 data, and its use aligns Cal-Adapt with current, peer-reviewed science that is broadly used as a basis for policy-relevant analyses.
@@ -32,4 +33,3 @@ Climate Action Team was to consider a longer-term (2015-2100) analysis, which Pi
 The following points are important to note:
 * Although the models are nicknamed <q>hot/dry</q>, <q>cool/wet</q>, <q>average</q>, and <q>complement</q>, these monikers are apt only in a statistical sense based on analysis of the entire state of California over the 2015-2100 timeframe. In other words, the so-called <q>hot/dry</q> model should not be assumed to be the <q>hottest/driest</q> for a particular visualization or analysis.
 * The so-called <q>cool/wet</q> model still describes a warming climate, but one that (in a statistical sense over the 2015-2100 timeframe) is relatively cooler and wetter than the other DWR CCTAG models.
-

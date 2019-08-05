@@ -1,15 +1,26 @@
 const path = require('path');
 const webpack = require('webpack');
+const nunjucks = require('nunjucks');
 const glob_entries = require('webpack-glob-folder-entries');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const pages = require('./pages.generate.js');
+const pages = require('./build_scripts/pages.generate.js');
+const data = require('./build_scripts/pages.data.js');
+//const config = require('./build_scripts/paths.config');
 const nunjucksFilters = require('./src/templates/filters');
-const buildPath = path.resolve(__dirname, 'public');
 const isProd = process.env.NODE_ENV === 'production';
+
+// const buildPath = config.root.dest;
+// const entryPoints = config.js.entries;
+
+const buildPath = path.resolve(__dirname, 'public');
+const entryPoints = {
+  main: './src/js/main.js',
+  'annual-averages': './src/js/tools/annual-averages.js',
+};
 
 // Webpack doesn't support glob paths. For the nunjucks-html-loader
 // we need each path to be specified for it to work (even subdirectories)
@@ -21,11 +32,6 @@ function returnEntries(globPath){
   }
   return folderList;
 }
-
-const entryPoints = {
-  main: './src/js/main.js',
-  'annual-averages': './src/js/tools/annual-averages.js',
-};
 
 module.exports = {
   entry: entryPoints,
@@ -70,25 +76,10 @@ module.exports = {
         use : [
           'html-loader',
           {
-            loader  : 'nunjucks-html-loader',
+            loader  : path.resolve(__dirname, path.join(__dirname, './build_scripts/nunjucks-html-loader.js')),
             options: {
               searchPaths: [...returnEntries('./src/templates/**/')],
-              context: require('./pages.data.js'),
-              filters: nunjucksFilters,
-            },
-          },
-        ]
-      },
-      {
-        test: /\.md$/,
-        exclude : /node_modules/,
-        use : [
-          'html-loader',
-          {
-            loader  : 'nunjucks-html-loader',
-            options: {
-              searchPaths: [...returnEntries('./src/templates/**/')],
-              context: require('./pages.data.js'),
+              context: data,
               filters: nunjucksFilters,
             },
           },
@@ -105,16 +96,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
     }),
-    //...pages.generateTopLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
-    //...pages.generateSecondLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages')), entryPoints),
-    ...pages.generateBlogPosts(path.resolve(__dirname, path.join(__dirname, './src/blog/posts'))),
+    ...pages.generateTopLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages'))),
+    ...pages.generateSecondLevelPages(path.resolve(__dirname, path.join(__dirname, './src/pages')), entryPoints),
+    pages.generateBlogIndexPage(path.resolve(__dirname, path.join(__dirname, './src/blog'))),
+    ...pages.generateBlogPostPages(path.resolve(__dirname, path.join(__dirname, './src/blog')), data.posts),
   ]
-/*  resolve: {
-    extensions: ['.mjs', '.js', '.svelte'],
-    alias: {
-      '@': path.resolve(__dirname, './'),
-      styles: path.resolve(__dirname, './styles')
-    },
-    mainFields: ['svelte', 'browser', 'module', 'main']
-  },*/
 }

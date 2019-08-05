@@ -1,0 +1,64 @@
+{% extends "site.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+<style type="text/css">
+  .post img {
+    margin: 0 auto;
+  }
+  .post .content {
+    width: 80%;
+    margin: 0 auto;
+  }
+</style>
+{% endblock %}
+
+{% block page_content %}
+{% set name = output_filename().split('/')[0] %}
+<main>
+  {{ name }}
+  {% for post in posts %}
+    {% if post.attributes.permalink === name %}
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">{{ post.attributes.title }}</h1>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="container">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="/media/blog/sf_king_tide_1200.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">{{ post.attributes.title }}</p>
+                  <p class="subtitle is-6">{{ post.attributes.tags }}</p>
+                </div>
+              </div>
+              <div class="content">
+                {{ post.body | md |safe }}
+                <br>
+                <time datetime="{{ post.attributes.date }}">{{ post.attributes.date }}</time>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% else %}
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Error</h1>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
+</main>
+{% endblock %}

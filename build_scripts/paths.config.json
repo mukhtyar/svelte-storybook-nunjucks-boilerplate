@@ -1,0 +1,38 @@
+{
+  "root": {
+    "src": "./src",
+    "dest": "./public"
+  },
+  "html": {
+    "src": "html",
+    "dest": "./"
+  },
+  "js": {
+    "src": "scripts",
+    "dest": "js",
+    "entries": {
+      "main": ["./main.js"],
+      "annual-averages": ["./tools/annual-averages.js"],
+    }
+  },
+  "styles": {
+    "src": "styles",
+    "dest": "styles"
+  },
+  "media": {
+    "src": "media",
+    "dest": "media",
+    "static": "docs"
+  },
+  "static": {
+    "src": "static",
+    "dest": "./"
+  },
+  "blog": {
+    "src": "blog",
+    "dest": "blog"
+  },
+  "templates": {
+    "src": "templates"
+  }
+}

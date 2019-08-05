@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pages = require('./build_scripts/pages.generate.js');
 const data = require('./build_scripts/pages.data.js');
-//const config = require('./build_scripts/paths.config');
 const nunjucksFilters = require('./src/templates/filters');
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -19,7 +18,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const buildPath = path.resolve(__dirname, 'public');
 const entryPoints = {
   main: './src/js/main.js',
-  'annual-averages': './src/js/tools/annual-averages.js',
+  'my-map-tool': './src/js/tools/my-map-tool.js',
 };
 
 // Webpack doesn't support glob paths. For the nunjucks-html-loader
@@ -66,7 +65,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: isProd ? '[path][name].[contenthash].[ext]' : '[path][name].[ext]',
+          name: '[path][name].[ext]',
           context: 'src'
         }
       },

@@ -1,3 +1,5 @@
+// Loader is forked from https://github.com/ft-interactive/nunjucks-html-loader
+// Added the output filename to the global nunjucks environment to use in the blog post template
 var utils = require("loader-utils");
 var fs = require("fs");
 var path = require("path");

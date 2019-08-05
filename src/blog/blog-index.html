@@ -30,21 +30,20 @@
               <div class="media-content">
                 <p class="title is-4">{{ post.attributes.title }}</p>
                 <p class="subtitle is-6">{{ post.attributes.date }}</p>
-                <a href="{{ post.attributes.permalink }}">Link to post</a>
               </div>
             </div>
             <div class="content">
               {{ post.attributes.snippet }}
               <br>
-              <time datetime="{{ post.attributes.date }}"></time>
+              <a href="/blog/posts/{{ post.attributes.permalink }}">Read More</a>
             </div>
           </div>
         </div>
       </div>
-      {% endfor %}       
+      {% endfor %}
       </div>
     </div>
   </section>
-  
+
 </main>
 {% endblock %}

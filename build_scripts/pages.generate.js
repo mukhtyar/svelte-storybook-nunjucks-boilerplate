@@ -75,7 +75,6 @@ const pages = {
   },
   generateBlogPostPages: function generate(blogPath, posts) {
     const templateFile = path.resolve(blogPath, 'blog-post.html');
-    console.log('blog', templateFile);
     const markdownFiles = returnFileList(path.resolve(blogPath, 'posts'));
     const chunks = ['main'];
     return markdownFiles.map((file) => {

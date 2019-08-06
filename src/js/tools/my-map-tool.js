@@ -1,3 +1,4 @@
+import 'leaflet/dist/leaflet.css';
 import MapComponent from "./../components/Map.svelte";
 
 document.addEventListener('DOMContentLoaded', () => {

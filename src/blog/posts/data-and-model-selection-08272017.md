@@ -5,7 +5,7 @@ date: 2017-08-27
 author: Cal-Adapt
 image: caladapt_post
 tags: Cal-Adapt, data
-snippet: Data and model selection in Cal-Adapt 2.0
+snippet: The projected temperature and precipitation data portrayed on Cal-Adapt 2.0 were statistically downscaled using LOCA by Scripps Institution of Oceanography. This post discusses the data and model selection in Cal-Adapt 2.0.
 ---
 
 Through Cal-Adapt, users can download projected climate data associated with 32 General Circulation Models (GCMs, also known as Global Climate Models). This suite of models—known as [CMIP5](http://cmip-pcmdi.llnl.gov/cmip5/data_portal.html)—was used as the basis for the United Nation’s Intergovernmental Panel on Climate Change (IPCC) Fifth Assessment Report.  There is a vast body of literature built on the CMIP5 data, and its use aligns Cal-Adapt with current, peer-reviewed science that is broadly used as a basis for policy-relevant analyses.

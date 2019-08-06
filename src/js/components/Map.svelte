@@ -17,6 +17,7 @@
   export let lat;
   export let lon;
   export let zoom;
+  export let basemap = 'https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png';
 
   let container;
   let map;
@@ -27,7 +28,7 @@
       zoom,
     });
 
-    L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png').addTo(map);
+    L.tileLayer(basemap).addTo(map);
 
     return () => {
       map.remove();

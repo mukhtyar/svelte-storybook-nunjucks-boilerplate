@@ -1,4 +1,7 @@
-import '@storybook/addon-actions/register'
-import '@storybook/addon-knobs/register'
-import '@storybook/addon-a11y/register'
-import '@storybook/addon-notes/register'
+import { configure } from '@storybook/svelte';
+
+function loadStories() {
+  require('../stories/index.stories.js');
+}
+
+configure(loadStories, module);

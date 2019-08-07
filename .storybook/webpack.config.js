@@ -20,37 +20,13 @@ module.exports = async ({ config, mode }) => ({
         }
       },
       {
-        test: /\.(sass|scss)$/,
+        test: /\.(css|sass|scss)$/,
         use: [
-          {
-            loader: 'style-loader',
-            options: { sourceMap: true }
-          },
-          {
-            loader: 'css-loader',
-            options: { url: false, sourceMap: true }
-          },
-          {
-            loader: 'sass-loader',
-            options: { sourceMap: true }
-          },
+          'style-loader',
+          { loader: 'css-loader', options: { url: false, sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } }
         ],
-        include: path.resolve(__dirname, '../')
-      },
-      {
-        test: /\.(css)$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: { sourceMap: true }
-          },
-          {
-            loader: 'css-loader',
-            options: { url: false, sourceMap: true }
-          },
-        ],
-        include: path.resolve(__dirname, '../')
-      },
+      }
     ]
   }
 });

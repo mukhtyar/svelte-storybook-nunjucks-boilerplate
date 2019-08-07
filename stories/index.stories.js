@@ -1,6 +1,6 @@
 import { storiesOf, addDecorator } from '@storybook/svelte';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, number, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import '../src/styles/main.scss';
@@ -24,7 +24,9 @@ storiesOf('Button', module)
   }))
   .add('with text', () => ({
     Component: Button,
-    props: { text: 'Hello Button' },
+    props: { 
+      text: text('Text', 'Hello Storybook'),
+    },
     on: { click: action('clicked') },
   }))
   .add('with some emoji', () => ({
@@ -50,7 +52,7 @@ storiesOf('Map', module)
     props: {
       lat: 40.5,
       lon: -120.5,
-      zoom: 10,
+      zoom: number('Zoom', 10),
       basemap: 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg'
     },
     template: mapTemplate,

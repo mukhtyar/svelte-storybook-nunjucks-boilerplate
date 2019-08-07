@@ -25,7 +25,7 @@
               <a href="/blog">Back to Blog</a></li>
             </nav>
             <h1 class="title">{{ post.attributes.title }}</h1>
-            <time datetime="{{ post.attributes.date }}">{{ post.attributes.date }}</time>
+            <time datetime="{{ post.attributes.date }}">{{ post.attributes.date | formatDate }}</time>
           </div>
         </div>
       </section>

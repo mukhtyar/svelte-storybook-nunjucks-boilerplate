@@ -28,7 +28,6 @@ function returnFileList(dir) {
   }, []);
 }
 
-
 const pages = {
   generateTopLevelPages: function generate(pagesPath) {
     const topLevelFiles = returnFileList(pagesPath);

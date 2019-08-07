@@ -12,10 +12,10 @@ const data = require('./build_scripts/pages.data.js');
 const nunjucksFilters = require('./src/templates/filters');
 const isProd = process.env.NODE_ENV === 'production';
 
-// const buildPath = config.root.dest;
-// const entryPoints = config.js.entries;
-
 const buildPath = path.resolve(__dirname, 'public');
+
+// Add new entry points here. 
+// Entry point name for tools should be same as html template it will be injected into
 const entryPoints = {
   main: './src/js/main.js',
   'my-map-tool': './src/js/tools/my-map-tool.js',

@@ -1,10 +1,10 @@
 ---
 title: Underlying Data and Model Selection in Cal-Adapt 2.0
 permalink: underlying-data-model-selection-caladapt-08272017
-date: 2017-08-27
+date: 2019-08-27
 author: Cal-Adapt
 image: caladapt_post
-tags: Cal-Adapt, data
+tags: Data
 snippet: The projected temperature and precipitation data portrayed on Cal-Adapt 2.0 were statistically downscaled using LOCA by Scripps Institution of Oceanography. This post discusses the data and model selection in Cal-Adapt 2.0.
 ---
 

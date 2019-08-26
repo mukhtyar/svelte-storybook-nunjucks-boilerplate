@@ -14,9 +14,10 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const buildPath = path.resolve(__dirname, 'public');
 
-// Add new entry points here. 
+// Add new entry points here.
 // Entry point name for tools should be same as html template it will be injected into
 const entryPoints = {
+  //main: ['@webcomponents/custom-elements', './src/js/main.js'],
   main: './src/js/main.js',
   'my-map-tool': './src/js/tools/my-map-tool.js',
 };
@@ -41,25 +42,44 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /(\.m?js?$)|(\.svelte$)/,
+        exclude: /\bcore-js\b/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: {
+                  browsers: ['last 2 versions', '> 1%', 'IE 11'],
+                },
+                useBuiltIns: 'usage',
+                corejs: 3,
+              }
+            ],
+          ],
+          sourceType: 'unambiguous',
+          plugins: [
+            'transform-custom-element-classes',
+            '@babel/plugin-syntax-dynamic-import',
+            [
+              '@babel/plugin-transform-runtime',
+              {
+                useESModules: true
+              }
+            ],
+          ],
+        },
+        exclude: [/node_modules\/@babel|core-js/],
+      },
+      {
         test: /\.svelte$/,
+        exclude: /node_modules/,
         loader: 'svelte-loader',
         options: {
           emitCss: true,
-          hotReload: true
+          hotReload: false
         }
-      },
-      {
-        test: /\.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { url: false, sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } }
-        ],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
